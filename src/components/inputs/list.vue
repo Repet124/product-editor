@@ -3,7 +3,7 @@
 		<label :for="ident">
 			<slot></slot>
 		</label>
-		<ListItem v-for="(item, index) in list" :key="index" :name="item.name" :val="item.val"/>
+		<ListItem v-for="(item, index) in list" :key="index" :name="item.name" :val="item.val" @input="$emit('input', ch(index, $event))"/>
 	</div>
 </template>
 
@@ -26,6 +26,13 @@ export default {
 			ident: 'ident'+this.name,
 			list: this.value,
 			placeholder: this.placeholderVal
+		}
+	},
+	methods: {
+		ch: function(index, obj) {
+			let newArr = [...this.list];
+			newArr[index] = obj;
+			return newArr;
 		}
 	}
 }
