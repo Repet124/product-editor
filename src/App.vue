@@ -1,21 +1,35 @@
 <template>
 	<div id="app">
 		<!-- <TypeSelector :txt="test"/> -->
-		<Varchar name="test" placeholderVal="input yout text">
+		<!-- <Varchar name="test" placeholderVal="input yout text">
 			Some label:
-		</Varchar>
+		</Varchar> -->
+		{{ list[0].val }}
+		<List v-model="list">hhh</List>
 	</div>
 </template>
 
 <script>
 
 // import TypeSelector from './components/TypeSelector.vue';
-import Varchar from './components/inputs/varchar.vue';
+// import Varchar from './components/inputs/varchar.vue';
+import List from './components/inputs/list.vue';
 
 export default {
 	name: 'App',
 	components: {
-		Varchar
+		// Varchar
+		List
+	},
+	data: function() {
+		return {
+			list: [
+				{
+					name: 'test name',
+					val: 'test val'
+				}
+			]
+		}
 	}
 }
 </script>
