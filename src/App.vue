@@ -1,28 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+	<div id="app">
+		<!-- <TypeSelector :txt="test"/> -->
+		<Varchar name="Test">
+			Some label
+		</Varchar>
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+// import TypeSelector from './components/TypeSelector.vue';
+import Varchar from './components/inputs/varchar.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+	name: 'App',
+	components: {
+		Varchar
+	}
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
