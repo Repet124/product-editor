@@ -1,9 +1,9 @@
 <template>
-	<div class="input">
+	<div>
 		<label :for="ident">
 			<slot></slot>
 		</label>
-		<input :id="ident" type="text" :name="name" v-model="txt" :placeholder="placeholder">
+		<input class="input" :id="ident" type="text" :name="name" v-model="txt" :placeholder="placeholder">
 	</div>
 </template>
 
@@ -11,13 +11,23 @@
 
 export default {
 	name: 'Varchar',
-	props: ['name', 'defaultValue', 'placeholder'],
+	props: ['name', 'defaultValue', 'placeholderVal'],
 	data: function() {
 		return {
 			ident: 'ident'+this.name,
-			txt: this.defaultValue
+			txt: this.defaultValue,
+			placeholder: this.placeholderVal
 		}
 	}
 }
 
 </script>
+
+<style>
+	.input {
+		padding: 5px 8px;
+		border-radius: 5px;
+		border: 1px solid #000;
+		font-size: 16px;
+	}
+</style>
