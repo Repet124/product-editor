@@ -3,5 +3,9 @@ export default {
 		game: 'Игры',
 		pack: 'Паки',
 		cheat: 'Спец. предложения'
+	},
+	radio: {
+		first: 'firstName',
+		second: 'secondName'
 	}
 }

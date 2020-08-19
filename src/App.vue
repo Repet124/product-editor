@@ -5,6 +5,9 @@
 			Some label:
 		</Varchar> -->
 		<List v-model="list" phName="input field name" phVal="input field val"></List>
+		<Radio v-model="selectItem" :list="preferences.radio">
+			Radio component
+		</Radio>
 	</div>
 </template>
 
@@ -13,12 +16,16 @@
 // import TypeSelector from './components/TypeSelector.vue';
 // import Varchar from './components/inputs/varchar.vue';
 import List from './components/inputs/list.vue';
+import Radio from  './components/inputs/radio.vue';
+
+import preferences from './preferences.js';
 
 export default {
 	name: 'App',
 	components: {
-		// Varchar
-		List
+		// Varcha4r
+		List,
+		Radio
 	},
 	data: function() {
 		return {
@@ -26,12 +33,10 @@ export default {
 				{
 					name: 'test name',
 					val: 'test val'
-				},
-				{
-					name: 'second name',
-					val: 'second val'
 				}
-			]
+			],
+			selectItem: 'first',
+			preferences: preferences
 		}
 	}
 }
