@@ -1,8 +1,20 @@
 <template>
 	<div>
-		<input class="input" type="text" :value="name" @input="$emit('input', ch('name', $event.target.value))">
+		<input
+			class="input"
+			type="text"
+			:value="name"
+			@input="$emit('input', ch('name', $event.target.value))"
+			:placeholder="placeholderObj.name"
+		>
 		:
-		<input class="input" type="text" :value="val" @input="$emit('input', ch('val', $event.target.value))">
+		<input
+			class="input"
+			type="text"
+			:value="val"
+			@input="$emit('input', ch('val', $event.target.value))"
+			:placeholder="placeholderObj.val"
+		>
 	</div>
 </template>
 
@@ -14,7 +26,7 @@ export default {
 		prop: 'value',
 		event: 'input'
 	},
-	props: ['name', 'val', 'value'],
+	props: ['name', 'val', 'value', 'placeholderObj'],
 	methods: {
 		ch: function(property, val) {
 			let resultObj = {
@@ -23,6 +35,7 @@ export default {
 				},
 				additionalObj = {};
 			additionalObj[property] = val;
+			console.log({...resultObj, ...additionalObj})
 			return {...resultObj, ...additionalObj};
 		}
 	}

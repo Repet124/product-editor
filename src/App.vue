@@ -5,7 +5,12 @@
 			Some label:
 		</Varchar> -->
 		{{ list[0].val }}
-		<List v-model="list">hhh</List>
+		<List
+			v-model="list"
+			phName="input field name"
+			phVal="input field val">
+			List label
+		</List>
 	</div>
 </template>
 

@@ -3,7 +3,14 @@
 		<label :for="ident">
 			<slot></slot>
 		</label>
-		<ListItem v-for="(item, index) in list" :key="index" :name="item.name" :val="item.val" @input="$emit('input', ch(index, $event))"/>
+		<ListItem 
+			v-for="(item, index) in list"
+			:key="index"
+			:name="item.name"
+			:val="item.val"
+			:placeholderObj="getPlaceholderObj"
+			@input="$emit('input', ch(index, $event))"
+		/>
 	</div>
 </template>
 
@@ -20,7 +27,7 @@ export default {
 		prop: 'value',
 		event: 'input'
 	},
-	props: ['value'],
+	props: ['value', 'phName', 'phVal'],
 	data: function() {
 		return {
 			ident: 'ident'+this.name,
@@ -33,6 +40,14 @@ export default {
 			let newArr = [...this.list];
 			newArr[index] = obj;
 			return newArr;
+		}
+	},
+	computed: {
+		getPlaceholderObj: function() {
+			return {
+				name: this.phName,
+				val: this.phVal
+			}
 		}
 	}
 }
