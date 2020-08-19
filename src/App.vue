@@ -4,12 +4,7 @@
 		<!-- <Varchar name="test" placeholderVal="input yout text">
 			Some label:
 		</Varchar> -->
-		<List
-			v-model="list"
-			phName="input field name"
-			phVal="input field val">
-		</List>
-		<div v-for="(item, index) in list" :key="index">{{ item.name }} - {{ item.val }}</div>
+		<List v-model="list" phName="input field name" phVal="input field val"></List>
 	</div>
 </template>
 

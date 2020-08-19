@@ -39,9 +39,7 @@ export default {
 	},
 	methods: {
 		ch: function(index, obj) {
-			for (let key in obj) {
-				this.list[index][key] = obj[key]
-			}
+			this.list.splice(index, 1, obj);
 			return this.list;
 		},
 		add: function() {
