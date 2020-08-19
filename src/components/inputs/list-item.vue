@@ -15,6 +15,7 @@
 			@input="$emit('input', ch('val', $event.target.value))"
 			:placeholder="placeholderObj.val"
 		>
+		<button class="btn" @click="$emit('rm')">Х</button>
 	</div>
 </template>
 

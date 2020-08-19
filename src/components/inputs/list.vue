@@ -10,6 +10,7 @@
 			:val="item.val"
 			:placeholderObj="getPlaceholderObj"
 			@input="$emit('input', ch(index, $event))"
+			@rm="$emit('input', rm(index))"
 		/>
 		<button class="btn" @click="$emit('input', add())">Добавить</button>
 	</div>
@@ -48,6 +49,10 @@ export default {
 				name: '',
 				val: ''
 			});
+			return this.list;
+		},
+		rm: function(index) {
+			this.list.splice(index, 1);
 			return this.list;
 		}
 	},
