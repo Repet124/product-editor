@@ -37,9 +37,10 @@ export default {
 	},
 	methods: {
 		ch: function(index, obj) {
-			let newArr = [...this.list];
-			newArr[index] = obj;
-			return newArr;
+			for (let key in obj) {
+				this.list[index][key] = obj[key]
+			}
+			return this.list;
 		}
 	},
 	computed: {

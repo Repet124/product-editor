@@ -4,12 +4,12 @@
 		<!-- <Varchar name="test" placeholderVal="input yout text">
 			Some label:
 		</Varchar> -->
+		{{ list[0].name }}
 		{{ list[0].val }}
 		<List
 			v-model="list"
 			phName="input field name"
 			phVal="input field val">
-			List label
 		</List>
 	</div>
 </template>
@@ -32,6 +32,10 @@ export default {
 				{
 					name: 'test name',
 					val: 'test val'
+				},
+				{
+					name: 'second name',
+					val: 'second val'
 				}
 			]
 		}

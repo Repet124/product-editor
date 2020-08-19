@@ -35,7 +35,6 @@ export default {
 				},
 				additionalObj = {};
 			additionalObj[property] = val;
-			console.log({...resultObj, ...additionalObj})
 			return {...resultObj, ...additionalObj};
 		}
 	}
