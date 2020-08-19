@@ -35,7 +35,7 @@ export default {
 					val: 'test val'
 				}
 			],
-			selectItem: 'first',
+			selectItem: 'second',
 			preferences: preferences
 		}
 	}
