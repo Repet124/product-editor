@@ -11,6 +11,7 @@
 			:placeholderObj="getPlaceholderObj"
 			@input="$emit('input', ch(index, $event))"
 		/>
+		<button class="btn" @click="$emit('input', add())">Добавить</button>
 	</div>
 </template>
 
@@ -40,6 +41,13 @@ export default {
 			for (let key in obj) {
 				this.list[index][key] = obj[key]
 			}
+			return this.list;
+		},
+		add: function() {
+			this.list.push({
+				name: '',
+				val: ''
+			});
 			return this.list;
 		}
 	},
