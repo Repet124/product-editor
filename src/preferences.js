@@ -7,5 +7,15 @@ export default {
 	radio: {
 		first: 'firstName',
 		second: 'secondName'
-	}
+	},
+	checkbox: [
+		{
+			name: 'firstName',
+			val: 'first'
+		},
+		{
+			name: 'secondName',
+			val: 'second'
+		}
+	]
 }

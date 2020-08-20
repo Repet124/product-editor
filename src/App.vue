@@ -8,6 +8,7 @@
 		<Radio v-model="selectItem" :list="preferences.radio">
 			Radio component
 		</Radio>
+		<Checkbox v-model="arr" :list="preferences.checkbox"></Checkbox>
 	</div>
 </template>
 
@@ -17,6 +18,7 @@
 // import Varchar from './components/inputs/varchar.vue';
 import List from './components/inputs/list.vue';
 import Radio from  './components/inputs/radio.vue';
+import Checkbox from './components/inputs/checkbox.vue';
 
 import preferences from './preferences.js';
 
@@ -25,7 +27,8 @@ export default {
 	components: {
 		// Varcha4r
 		List,
-		Radio
+		Radio,
+		Checkbox
 	},
 	data: function() {
 		return {
@@ -36,6 +39,7 @@ export default {
 				}
 			],
 			selectItem: 'second',
+			arr: ['first', 'second'],
 			preferences: preferences
 		}
 	}
