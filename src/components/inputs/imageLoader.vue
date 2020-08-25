@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<input type="file" ref="input" :multiple="multiple > 1" hidden @change="show">
+		<input type="file" ref="input" :multiple="multiple > 1" hidden @change="сh">
 		<div class="imagePreview_wrapper" v-if="images.length !== 0">
 			<ImageItem v-for="(img, index) in images" :key="index" :src="img.url" @rm="rm(index)"></ImageItem>
 		</div>
@@ -38,14 +38,17 @@ export default {
 		}
 	},
 	methods: {
-		show: function() {
-			Array.from(this.$refs.input.files).forEach(item => {
+		сh: function() {
+			Array.from(this.$refs.input.files).some(item => {
+				if (this.images.length >= this.multiple) {
+					console.log('max count images equal '+this.multiple);
+					return true;
+				}
 				this.$set(this.images, this.images.length, {
 					url: URL.createObjectURL(item),
 					file: item
 				})
 			})
-			console.log(this.files)
 		},
 		load: function() {
 			this.$refs.input.click()
