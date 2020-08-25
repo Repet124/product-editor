@@ -9,7 +9,7 @@
 			Radio component
 		</Radio>
 		<Checkbox v-model="arr" :list="preferences.checkbox"></Checkbox> -->
-		<ImageLoader count="3" :defaultImages="files"></ImageLoader>
+		<ImageLoader v-model="files" count="3"></ImageLoader>
 	</div>
 </template>
 
