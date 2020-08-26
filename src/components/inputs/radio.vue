@@ -1,11 +1,14 @@
 <template>
-	<div>
-		<slot></slot>
-		<br>
-		<label v-for="(val, name, index) in list" :key="index">
-			<input type="radio" :value="name" :name="ident" :checked="value === name" @change="$emit('change', name)">
-			{{ val }}
+	<div  class="input_container">
+		<label class="input_label" :for="ident">
+			<slot></slot>
 		</label>
+		<div class="input_wrapper">
+			<label v-for="(val, name, index) in list" :key="index" class="input_check">
+				<input type="radio" :value="name" :name="ident" :checked="value === name" @change="$emit('change', name)">
+				{{ val }}
+			</label>
+		</div>
 	</div>
 </template>
 

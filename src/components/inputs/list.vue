@@ -1,18 +1,20 @@
 <template>
-	<div>
-		<label :for="ident">
+	<div  class="input_container">
+		<label class="input_label" :for="ident">
 			<slot></slot>
 		</label>
-		<ListItem 
-			v-for="(item, index) in list"
-			:key="index"
-			:name="item.name"
-			:val="item.val"
-			:placeholderObj="getPlaceholderObj"
-			@input="$emit('input', ch(index, $event))"
-			@rm="$emit('input', rm(index))"
-		/>
-		<button class="btn" @click="$emit('input', add())">Добавить</button>
+		<div class="input_wrapper">
+			<ListItem 
+				v-for="(item, index) in list"
+				:key="index"
+				:name="item.name"
+				:val="item.val"
+				:placeholderObj="getPlaceholderObj"
+				@input="$emit('input', ch(index, $event))"
+				@rm="$emit('input', rm(index))"
+			/>
+			<button class="btn" @click="$emit('input', add())">Добавить</button>
+		</div>
 	</div>
 </template>
 

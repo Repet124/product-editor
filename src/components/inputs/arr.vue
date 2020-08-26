@@ -1,15 +1,20 @@
 <template>
-	<div>
-		<ArrItem 
-			v-for="(item, index) in value"
-			:key="index"
-			:placeholder="placeholder"
-			:value="item"
-			@input="$emit('change', ch(index, $event))"
-			@rm="$emit('change', rm(index))"
-		>
-		</ArrItem>
-		<button @click="$emit('change', add())">Add</button>
+	<div class="input_container">
+		<label class="input_label">
+			<slot></slot>
+		</label>
+		<div class="input_wrapper">
+			<ArrItem 
+				v-for="(item, index) in value"
+				:key="index"
+				:placeholder="placeholder"
+				:value="item"
+				@input="$emit('change', ch(index, $event))"
+				@rm="$emit('change', rm(index))"
+			>
+			</ArrItem>
+			<button class="btn" @click="$emit('change', add())">Add</button>
+		</div>
 	</div>
 </template>
 

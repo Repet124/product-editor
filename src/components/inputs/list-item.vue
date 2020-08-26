@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div class="input_listItem">
 		<input
-			class="input"
+			class="input_text"
 			type="text"
 			:value="name"
 			@input="$emit('input', ch('name', $event.target.value))"
@@ -9,13 +9,13 @@
 		>
 		:
 		<input
-			class="input"
+			class="input_text"
 			type="text"
 			:value="val"
 			@input="$emit('input', ch('val', $event.target.value))"
 			:placeholder="placeholderObj.val"
 		>
-		<button class="btn" @click="$emit('rm')">Х</button>
+		<button class="rm" @click="$emit('rm')">Х</button>
 	</div>
 </template>
 

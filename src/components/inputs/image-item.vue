@@ -1,6 +1,6 @@
 <template>
 	<div class="imagePreview">
-		<button class="imagePreview_rm" @click="$emit('rm')">X</button>
+		<button class="rm imagePreview_rm" @click="$emit('rm')">X</button>
 		<img class="imagePreview_img" :src="src">
 	</div>
 </template>
@@ -27,17 +27,8 @@ export default {
 	}
 	.imagePreview_rm {
 		position: absolute;
-		display: block;
 		top: -5px;
 		right: -5px;
-		width: 25px;
-		height: 25px;
-		text-align: center;
-		padding: 3px;
-		border: none;
-		border-radius: 3px;
-		background-color: red;
-		color: #fff;
 	}
 	.imagePreview + .imagePreview {
 		margin-left: 10px;

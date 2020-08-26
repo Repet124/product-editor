@@ -1,10 +1,15 @@
 <template>
-	<div>
-		<input type="file" ref="input" :multiple="multiple > 1" hidden @change="$emit('change', сh());">
-		<div class="imagePreview_wrapper" v-if="images.length !== 0">
-			<ImageItem v-for="(img, index) in images" :key="index" :src="img.url" @rm="$emit('change', rm(index));"></ImageItem>
+	<div  class="input_container">
+		<label class="input_label">
+			<slot></slot>
+		</label>
+		<div class="input_wrapper">
+			<input type="file" ref="input" :multiple="multiple > 1" hidden @change="$emit('change', сh());">
+			<div class="imagePreview_wrapper" v-if="images.length !== 0">
+				<ImageItem v-for="(img, index) in images" :key="index" :src="img.url" @rm="$emit('change', rm(index));"></ImageItem>
+			</div>
+			<button class="btn" v-if="images.length < multiple" @click="load">Add image</button>
 		</div>
-		<button v-if="images.length < multiple" @click="load">Add image</button>
 	</div>
 </template>
 
@@ -72,6 +77,5 @@ export default {
 <style>
 	.imagePreview_wrapper {
 		display: flex;
-		margin-bottom: 10px;
 	}
 </style>

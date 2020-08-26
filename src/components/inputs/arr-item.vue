@@ -1,13 +1,13 @@
 <template>
-	<div>
+	<div class="input_listItem">
 		<input
-			class="input"
+			class="input_text"
 			type="text"
 			:value="value"
 			@input="$emit('input', $event.target.value)"
 			:placeholder="placeholder"
 		>
-		<button class="btn" @click="$emit('rm')">Х</button>
+		<button class="rm" @click="$emit('rm')">Х</button>
 	</div>
 </template>
 

@@ -1,9 +1,11 @@
 <template>
-	<div>
-		<label :for="ident">
+	<div  class="input_container">
+		<label class="input_label" :for="ident">
 			<slot></slot>
 		</label>
-		<input class="input" :id="ident" type="text" :name="name" v-model="txt" :placeholder="placeholder">
+		<div class="input_wrapper">
+			<input class="input_text" :id="ident" type="text" :name="name" v-model="txt" :placeholder="placeholder">
+		</div>
 	</div>
 </template>
 

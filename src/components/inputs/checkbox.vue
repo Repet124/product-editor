@@ -1,11 +1,14 @@
 <template>
-	<div>
-		<slot></slot>
-		<br>
-		<label v-for="(item, index) in list" :key="index">
-			<input type="checkbox" :value="name" :name="ident" :checked="value.includes(item.val)" @change="$emit('change', ch(item.val, value.includes(item.val)))">
-			{{ item.name }}
+	<div class="input_container">
+		<label class="input_label">
+			<slot></slot>
 		</label>
+		<div class="input_wrapper">
+			<label v-for="(item, index) in list" :key="index" class="input_check">
+				<input type="checkbox" :value="name" :name="ident" :checked="value.includes(item.val)" @change="$emit('change', ch(item.val, value.includes(item.val)))">
+				{{ item.name }}
+			</label>
+		</div>
 	</div>
 </template>
 
