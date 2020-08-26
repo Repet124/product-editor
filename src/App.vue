@@ -1,30 +1,36 @@
 <template>
 	<div id="app">
-		<!-- <TypeSelector :txt="test"/> -->
-		<Varchar name="test" placeholderVal="input yout text">
-			Test label:
-		</Varchar>
-		<List v-model="list" phName="input field name" phVal="input field val">
-			Test label:
-		</List>
-		<Radio v-model="selectItem" :list="preferences.radio">
-			Test label:
-		</Radio>
-		<Checkbox v-model="arr" :list="preferences.checkbox">
-			Test label:
-		</Checkbox>
-		<ImageLoader v-model="files" count="3">
-			Test label:
-		</ImageLoader>
-		<Arr v-model="arr" placeholder="input">
-			Test label:
-		</Arr>
+		<TypeSelector :list="preferences.types" v-model="type">Выбор типа:</TypeSelector>
+		<IdentSelector v-if="!ident"></IdentSelector>
+		<template v-else-if="prod">
+			<Varchar name="test" placeholderVal="input yout text">
+				Test label:
+			</Varchar>
+			<List v-model="prod.list" phName="input field name" phVal="input field val">
+				Test label:
+			</List>
+			<Radio v-model="prod.selectItem" :list="preferences.radio">
+				Test label:
+			</Radio>
+			<Checkbox v-model="prod.arr" :list="preferences.checkbox">
+				Test label:
+			</Checkbox>
+			<ImageLoader v-model="prod.files" count="3">
+				Test label:
+			</ImageLoader>
+			<Arr v-model="prod.arr" placeholder="input">
+				Test label:
+			</Arr>
+		</template>
+		<template v-else>Загрузка...</template>
 	</div>
 </template>
 
 <script>
 
-// import TypeSelector from './components/TypeSelector.vue';
+import TypeSelector from './components/TypeSelector.vue';
+import IdentSelector from './components/IdentSelector.vue';
+
 import Varchar from './components/inputs/varchar.vue';
 import List from './components/inputs/list.vue';
 import Radio from  './components/inputs/radio.vue';
@@ -33,10 +39,13 @@ import ImageLoader from './components/inputs/imageLoader.vue';
 import Arr from './components/inputs/arr.vue';
 
 import preferences from './preferences.js';
+import prod from './prod.js';
 
 export default {
 	name: 'App',
 	components: {
+		TypeSelector,
+		IdentSelector,
 		Varchar,
 		Arr,
 		List,
@@ -46,29 +55,10 @@ export default {
 	},
 	data: function() {
 		return {
-			list: [
-				{
-					name: 'test name',
-					val: 'test val'
-				}
-			],
-			selectItem: 'second',
-			arr: ['first', 'second'],
+			type: null,
+			ident: null,
 			preferences: preferences,
-			files: [
-				{
-					url: 'https://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg',
-					file: false
-				},
-				{
-					url: 'https://image.made-in-china.com/202f0j10jzGfdkZWbYqH/Pink-Electric-Fluffy-Cat-Plush-Stuffed-Toy-for-Children.jpg',
-					file: false
-				}
-			],
-			// files : [
-			// 	'https://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg',
-			// 	'https://image.made-in-china.com/202f0j10jzGfdkZWbYqH/Pink-Electric-Fluffy-Cat-Plush-Stuffed-Toy-for-Children.jpg'
-			// ]
+			prod: prod,
 		}
 	}
 }
@@ -82,6 +72,7 @@ export default {
 		outline: none;
 	}
 	#app {
+		padding: 10px;
 		font-family: Arial;
 		font-size: 16px;
 		background: #efebf0;
