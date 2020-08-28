@@ -3,7 +3,7 @@
 		{{type}}
 		{{ident}}
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
-		<IdentSelector v-if="!ident" :type="type" v-model="ident"></IdentSelector>
+		<IdentSelector v-if="type && !ident" :group="type" @change="chIdent($event)"></IdentSelector>
 		<template v-else-if="prod">
 			<Varchar name="test" placeholderVal="input yout text">
 				Test label:
@@ -24,7 +24,7 @@
 				Test label:
 			</Arr>
 		</template>
-		<template v-else>Загрузка...</template>
+		<strong v-else-if="ident">Loading...</strong>
 	</div>
 </template>
 
@@ -41,7 +41,7 @@ import ImageLoader from './components/inputs/imageLoader.vue';
 import Arr from './components/inputs/arr.vue';
 
 import preferences from './preferences.js';
-import prod from './prod.js';
+// import prod from './prod.js';
 
 export default {
 	name: 'App',
@@ -59,14 +59,24 @@ export default {
 		return {
 			type: null,
 			ident: null,
+			prod: null,
 			preferences: preferences,
-			prod: prod,
 		}
 	},
 	methods: {
 		chType: function(type) {
 			this.type = type;
 			this.ident = null;
+		},
+		chIdent: function(ident) {
+			this.ident = ident;
+			fetch('/prod.json')
+				.then(answer => answer.json())
+				.then(result => {
+					setTimeout(() => {
+						this.prod = result
+					}, 1000)
+				})
 		}
 	}
 }

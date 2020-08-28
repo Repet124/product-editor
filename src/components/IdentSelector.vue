@@ -1,27 +1,43 @@
 <template>
 	<div class="identSelector_container">
-		<ul>
-			<li v-for="item in idents[type]" :key="item.ident" @click="$emit('change', item.ident)">{{ item.name }}</li>
+		<strong v-if="!idents">Loading...</strong>
+		<ul v-else>
+			<li v-for="item in idents" :key="item.ident" @click="$emit('change', item.ident)">{{ item.name }}</li>
 		</ul>
 	</div>
 </template>
 
 <script>
 
-import idents from '../list.js';
 
 export default {
 	name: 'IdentSelector',
-	model: {
-		prop: 'ident',
-		event: 'change'
-	},
-	props: ['type', 'ident'],
+	props: ['group'],
 	data: function() {
 		return {
-			idents: idents
+			idents: null
 		}
-	}
+	},
+	methods: {
+		getIdents: function() {
+			this.idents = null;
+			fetch('/list.json')
+				.then(answer => answer.json())
+				.then(result => {
+					setTimeout(() => {
+						this.$nextTick(function () {
+							this.idents = result[this.group];
+						})
+					}, 1000)
+				})
+		}
+	},
+	watch: {
+		group: function() {
+			this.getIdents()
+		}
+	},
+	created: function() {this.getIdents()},
 }
 
 </script>
