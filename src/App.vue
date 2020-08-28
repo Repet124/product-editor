@@ -1,7 +1,9 @@
 <template>
 	<div id="app">
+		{{type}}
+		{{ident}}
 		<TypeSelector :list="preferences.types" v-model="type">Выбор типа:</TypeSelector>
-		<IdentSelector v-if="!ident"></IdentSelector>
+		<IdentSelector v-if="!ident" :type="type" v-model="ident"></IdentSelector>
 		<template v-else-if="prod">
 			<Varchar name="test" placeholderVal="input yout text">
 				Test label:
