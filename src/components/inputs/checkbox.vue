@@ -5,7 +5,7 @@
 		</label>
 		<div class="input_wrapper">
 			<label v-for="(item, index) in list" :key="index" class="input_check">
-				<input type="checkbox" :value="name" :name="ident" :checked="value.includes(item.val)" @change="$emit('change', ch(item.val, value.includes(item.val)))">
+				<input type="checkbox" :value="item.val" :name="ident" :checked="value.includes(item.val)" @change="$emit('change', ch(item.val, value.includes(item.val)))">
 				{{ item.name }}
 			</label>
 		</div>

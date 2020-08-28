@@ -19,11 +19,7 @@
 
 export default {
 	name: 'TypeSelector',
-	model: {
-		prop: 'type',
-		event: 'change'
-	},
-	props: ['type', 'list']
+	props: ['list']
 }
 
 </script>
