@@ -2,6 +2,7 @@
 	<div id="app">
 		{{type}}
 		{{ident}}
+		{{!!prod}}
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector v-if="type && !ident" :group="type" @change="chIdent($event)"></IdentSelector>
 		<template v-else-if="prod">
@@ -41,6 +42,7 @@ import ImageLoader from './components/inputs/imageLoader.vue';
 import Arr from './components/inputs/arr.vue';
 
 import preferences from './preferences.js';
+import request from './request.js';
 // import prod from './prod.js';
 
 export default {
@@ -67,16 +69,18 @@ export default {
 		chType: function(type) {
 			this.type = type;
 			this.ident = null;
+			this.prod = null;
 		},
 		chIdent: function(ident) {
 			this.ident = ident;
-			fetch('/prod.json')
-				.then(answer => answer.json())
-				.then(result => {
-					setTimeout(() => {
-						this.prod = result
-					}, 1000)
-				})
+			request('/prod.json', {}, answer => (this.prod = answer))
+			// fetch('/prod.json')
+			// 	.then(answer => answer.json())
+			// 	.then(result => {
+			// 		setTimeout(() => {
+			// 			this.prod = result
+			// 		}, 1000)
+			// 	})
 		}
 	}
 }
