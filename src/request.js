@@ -1,29 +1,5 @@
 import preferences from './preferences.js';
 
-
-const method = preferences.request.method,
-	typeRequest = preferences.request.type,
-	marker = preferences.request.marker;
-
-function getFetchData(data) {
-	data = {...data, ...marker};
-	console.log(data)
-	switch(typeRequest) {
-		case 'json':
-			return {
-				headers: {'Content-Type': 'application/json;charset=utf-8'},
-				body: JSON.stringify(data)
-			}
-		case 'FormData':
-			return {
-				headers: {'Content-Type': 'form/multipart;charset=utf-8'},
-				body: getFormData(data)
-			}
-		default:
-			throw new Error('Invalid data type');
-	}
-}
-
 function getFormData(data) {
 	let formData = new FormData();
 	for(let key in data) {
@@ -42,33 +18,29 @@ function prepareGet(obj) { // подготовка get запроса
 	return get; // возвращает строку get начиная с "?"
 }
 
-export default function requestToServer(type, to, requestData, resolve) {
-	const fetchData = getFetchData(requestData);
-	if (method === 'get') {
-		fetch(to+'?'+prepareGet(requestData))
-			.then(json => json.json())
-			.then(resolve)
-			return;
-	}
-	fetch(to, {
-		method: method,
-		headers: fetchData.headers,
-		body: fetchData.body
-	})
-		.then(test => test.text())
-		.then(ans => {
-			console.log(ans)
-		})
-		.then(answer => answer.json())
-		.then(result => {
-			setTimeout(() => {
-				resolve(result);
-			}, 1000)
-		})
-		.catch(err => {
-			console.log(err)
-		})
-}
+// export default function requestToServer(type, to, requestData, resolve) {
+// 	const fetchData = getFetchData(requestData);
+// 	if (method === 'get') {
+// 		fetch(to+'?'+prepareGet(requestData))
+// 			.then(json => json.json())
+// 			.then(resolve)
+// 			return;
+// 	}
+// 	fetch(to, {
+// 		method: method,
+// 		headers: fetchData.headers,
+// 		body: fetchData.body
+// 	})
+// 		.then(answer => answer.json())
+// 		.then(result => {
+// 			setTimeout(() => {
+// 				resolve(result);
+// 			}, 1000)
+// 		})
+// 		.catch(err => {
+// 			console.log(err)
+// 		})
+// }
 
 const optionsOfType = new Map(
 	[
@@ -83,15 +55,51 @@ const optionsOfType = new Map(
 	]
 );
 
-class Request = {
-	constructor(type, callbak) {
+export default class Request {
+	constructor(type, callback=()=>{console.log('Sended')}) {
+		this._url = preferences.request[type].url;
+		this._data = {};
+		this._callback = callback;
 		this.method = preferences.request[type].method;
 		this.marker = preferences.request[type].marker;
-		this.callbak = callbak;
 
-		const options = optionsOfType.get(preferences.request[type].type);
+		let options;
+		if (this.method !== 'get') {
+			options = optionsOfType.get(preferences.request[type].type);
+		} else {
+			options = {
+				headers: {"Content-Type": "text/plain;charset=UTF-8"}
+			}
+		}
 
 		this.headers = options.headers;
 		this.getBody = options.body;
+	}
+
+	set data(d) {
+		this._data = d;
+	}
+
+	set callback(f) {
+		this._callback = f;
+	}
+
+	send(callback=false) {
+		if (!callback) {callback = this._callback}
+		data = {...data, ...this.marker}
+		
+		fetch(this.url, {
+			method: this.method,
+			headers: this.headers,
+			// body: this.getBody(data)
+		})
+			.then(answer => answer.json())
+			.then(result => {
+				setTimeout(()=>{
+
+					callback(result)
+				}, 1000);
+			})
+			.catch(err => new Error(err))
 	}
 }

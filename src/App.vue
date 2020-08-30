@@ -42,7 +42,7 @@ import ImageLoader from './components/inputs/imageLoader.vue';
 import Arr from './components/inputs/arr.vue';
 
 import preferences from './preferences.js';
-import request from './request.js';
+import Request from './request.js';
 // import prod from './prod.js';
 
 export default {
@@ -73,7 +73,8 @@ export default {
 		},
 		chIdent: function(ident) {
 			this.ident = ident;
-			request('/prod.json', {}, answer => (this.prod = answer))
+			const prodRequest = new Request('prod', answer => (this.prod = answer));
+			prodRequest.send({})
 			// fetch('/prod.json')
 			// 	.then(answer => answer.json())
 			// 	.then(result => {

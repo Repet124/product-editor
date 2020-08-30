@@ -9,7 +9,6 @@
 
 <script>
 
-
 export default {
 	name: 'IdentSelector',
 	props: ['group'],

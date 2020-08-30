@@ -22,27 +22,32 @@ export default {
 		list: {
 			type: 'json',
 			method: 'get',
-			url: '/list.js'
+			url: '/list.json',
+			marker: {}
 		},
 		prod: {
 			type: 'json',
 			method: 'get',
-			url: '/prod.js'
+			url: '/prod.json',
+			marker: {}
 		},
 		add: {
 			type: 'FormData',
 			method: 'post',
-			url: '/func.js'
+			url: '/func.js',
+			marker: {}
 		},
 		ch: {
 			type: 'FormData',
 			method: 'post',
-			url: '/func.js'
+			url: '/func.js',
+			marker: {}
 		},
 		rm: {
 			type: 'json',
 			method: 'get',
-			url: '/func.js'
+			url: '/func.js',
+			marker: {}
 		}
 	}
 }
