@@ -5,26 +5,7 @@
 		{{!!prod}}
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector v-if="type && !ident" :group="type" @change="chIdent($event)"></IdentSelector>
-		<template v-else-if="prod">
-			<Varchar name="test" placeholderVal="input yout text">
-				Test label:
-			</Varchar>
-			<List v-model="prod.list" phName="input field name" phVal="input field val">
-				Test label:
-			</List>
-			<Radio v-model="prod.selectItem" :list="preferences.radio">
-				Test label:
-			</Radio>
-			<Checkbox v-model="prod.arr" :list="preferences.checkbox">
-				Test label:
-			</Checkbox>
-			<ImageLoader v-model="prod.files" count="3">
-				Test label:
-			</ImageLoader>
-			<Arr v-model="prod.arr" placeholder="input">
-				Test label:
-			</Arr>
-		</template>
+		<Editor v-else-if="prod" :prod="prod"></Editor>
 		<strong v-else-if="ident">Loading...</strong>
 	</div>
 </template>
@@ -33,29 +14,17 @@
 
 import TypeSelector from './components/TypeSelector.vue';
 import IdentSelector from './components/IdentSelector.vue';
-
-import Varchar from './components/inputs/varchar.vue';
-import List from './components/inputs/list.vue';
-import Radio from  './components/inputs/radio.vue';
-import Checkbox from './components/inputs/checkbox.vue';
-import ImageLoader from './components/inputs/imageLoader.vue';
-import Arr from './components/inputs/arr.vue';
+import Editor from './components/Editor.vue';
 
 import preferences from './preferences.js';
 import Request from './request.js';
-// import prod from './prod.js';
 
 export default {
 	name: 'App',
 	components: {
 		TypeSelector,
 		IdentSelector,
-		Varchar,
-		Arr,
-		List,
-		Radio,
-		Checkbox,
-		ImageLoader
+		Editor
 	},
 	data: function() {
 		return {
