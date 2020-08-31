@@ -9,32 +9,27 @@
 
 <script>
 
+import Request from '../request.js';
+
 export default {
 	name: 'IdentSelector',
 	props: ['group'],
 	data: function() {
 		return {
-			idents: null
+			idents: null,
+			listRequest: new Request('list', answer => {this.idents = answer[this.group]})
 		}
 	},
 	methods: {
 		getIdents: function() {
 			this.idents = null;
-			fetch('/list.json')
-				.then(answer => answer.json())
-				.then(result => {
-					setTimeout(() => {
-						this.$nextTick(function () {
-							this.idents = result[this.group];
-						})
-					}, 1000)
-				})
+
+			this.listRequest.data = {};
+			this.listRequest.send()
 		}
 	},
 	watch: {
-		group: function() {
-			this.getIdents()
-		}
+		group: function() {this.getIdents()}
 	},
 	created: function() {this.getIdents()},
 }

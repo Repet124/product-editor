@@ -63,7 +63,7 @@ export default {
 			ident: null,
 			prod: null,
 			preferences: preferences,
-			prodRequest: new Request('prod')
+			prodRequest: new Request('prod', answer => {this.prod = answer})
 		}
 	},
 	methods: {
@@ -78,9 +78,6 @@ export default {
 			this.prodRequest.data = {};
 			this.prodRequest.send();
 		}
-	},
-	created: function() {
-		this.prodRequest.callback = answer => {this.prod = answer};
 	}
 }
 </script>
