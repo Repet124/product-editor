@@ -63,6 +63,7 @@ export default {
 			ident: null,
 			prod: null,
 			preferences: preferences,
+			prodRequest: new Request('prod')
 		}
 	},
 	methods: {
@@ -73,16 +74,13 @@ export default {
 		},
 		chIdent: function(ident) {
 			this.ident = ident;
-			const prodRequest = new Request('prod', answer => (this.prod = answer));
-			prodRequest.send({})
-			// fetch('/prod.json')
-			// 	.then(answer => answer.json())
-			// 	.then(result => {
-			// 		setTimeout(() => {
-			// 			this.prod = result
-			// 		}, 1000)
-			// 	})
+
+			this.prodRequest.data = {};
+			this.prodRequest.send();
 		}
+	},
+	created: function() {
+		this.prodRequest.callback = answer => {this.prod = answer};
 	}
 }
 </script>
