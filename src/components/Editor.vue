@@ -34,6 +34,7 @@ import Arr from './inputs/arr.vue';
 
 import preferences from '../preferences.js';
 import Request from '../request.js';
+import { getHandlerOfCompnent } from '../buildProd.js';
 
 export default {
 	name: 'Editor',
