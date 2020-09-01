@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="prod">
 		<Varchar name="test" placeholderVal="input yout text">
 			Test label:
 		</Varchar>
@@ -18,7 +18,9 @@
 		<Arr v-model="prod.arr" placeholder="input">
 			Test label:
 		</Arr>
+		<button class="btn">Save</button>
 	</div>
+	<strong v-else>Loading...</strong>
 </template>
 
 <script>
@@ -31,6 +33,7 @@ import ImageLoader from './inputs/imageLoader.vue';
 import Arr from './inputs/arr.vue';
 
 import preferences from '../preferences.js';
+import Request from '../request.js';
 
 export default {
 	name: 'Editor',
@@ -42,11 +45,18 @@ export default {
 		Checkbox,
 		ImageLoader
 	},
+	props: ['typeprod', 'identprod'],
 	data: function() {
 		return {
-			preferences: preferences
+			preferences: preferences,
+			prod: null,
+			prodRequest: new Request('prod', answer => {this.prod = answer})
 		}
 	},
-	props: ['prod']
+	mounted: function() {
+		this.prod = null;
+		this.prodRequest.data = {};
+		this.prodRequest.send();
+	}
 }
 </script>

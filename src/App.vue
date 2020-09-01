@@ -2,11 +2,9 @@
 	<div id="app">
 		{{type}}
 		{{ident}}
-		{{!!prod}}
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector v-if="type && !ident" :group="type" @change="chIdent($event)"></IdentSelector>
-		<Editor v-else-if="prod" :prod="prod"></Editor>
-		<strong v-else-if="ident">Loading...</strong>
+		<Editor v-else-if="type && ident" :typeprod="type" :identprod="ident"></Editor>
 	</div>
 </template>
 
@@ -17,7 +15,6 @@ import IdentSelector from './components/IdentSelector.vue';
 import Editor from './components/Editor.vue';
 
 import preferences from './preferences.js';
-import Request from './request.js';
 
 export default {
 	name: 'App',
@@ -30,22 +27,16 @@ export default {
 		return {
 			type: null,
 			ident: null,
-			prod: null,
 			preferences: preferences,
-			prodRequest: new Request('prod', answer => {this.prod = answer})
 		}
 	},
 	methods: {
 		chType: function(type) {
 			this.type = type;
 			this.ident = null;
-			this.prod = null;
 		},
 		chIdent: function(ident) {
 			this.ident = ident;
-
-			this.prodRequest.data = {};
-			this.prodRequest.send();
 		}
 	}
 }
