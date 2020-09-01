@@ -50,7 +50,18 @@ export default {
 		return {
 			preferences: preferences,
 			prod: null,
-			prodRequest: new Request('prod', answer => {this.prod = answer})
+			prodRequest: new Request('prod', this.prodBuild)
+		}
+	},
+	methods: {
+		prodBuild: function(serverAnswer) {
+			let newProd = {};
+
+			for(let name in serverAnswer) {
+				newProd[name] = getHandlerOfCompnent(preferences.prod[name].component)(serverAnswer[name])
+			}
+
+			this.prod = newProd;
 		}
 	},
 	mounted: function() {
