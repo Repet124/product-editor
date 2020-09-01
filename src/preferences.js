@@ -9,6 +9,12 @@ export default {
 				count: 1
 			}
 		},
+		screen: {
+			component: 'ImageLoader',
+			opt: {
+				count: 3
+			}
+		}
 		radField: {
 			component: 'Radio',
 			opt: {
@@ -17,6 +23,24 @@ export default {
 					second: 'secondName'
 				}
 			}
+		},
+		checkField: {
+			component: 'Checkbox',
+			opt: {
+				fields: [
+					{
+						name: 'firstName',
+						val: 'first'
+					},
+					{
+						name: 'secondName',
+						val: 'second'
+					}
+				]
+			}
+		},
+		list: {
+			component: 'List',
 		}
 	},
 	types: {
@@ -24,20 +48,6 @@ export default {
 		pack: 'Паки',
 		cheat: 'Спец. предложения'
 	},
-	// radio: {
-	// 	first: 'firstName',
-	// 	second: 'secondName'
-	// },
-	// checkbox: [
-	// 	{
-	// 		name: 'firstName',
-	// 		val: 'first'
-	// 	},
-	// 	{
-	// 		name: 'secondName',
-	// 		val: 'second'
-	// 	}
-	// ],
 	request: {
 		list: {
 			type: 'json',
