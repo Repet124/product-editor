@@ -3,7 +3,10 @@
 		<button class="btn" @click="$emit('add')">New prod</button>
 		<strong v-if="!idents">Loading...</strong>
 		<ul v-else>
-			<li v-for="item in idents" :key="item.ident" @click="$emit('change', item.ident)">{{ item.name }}</li>
+			<li v-for="item in idents" :key="item.ident">
+				<span @click="$emit('change', item.ident)">{{ item.name }}</span>
+				<button class="rm" @click="$emit('rm', item.name, item.ident)">X</button>
+			</li>
 		</ul>
 	</div>
 </template>

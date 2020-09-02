@@ -2,8 +2,8 @@
 	<div id="app">
 		{{type}}
 		{{ident}}
-		<Modal header="Modal header" resolve="Ok" reject="Huita">
-			Вы действительно хотите удалить элемент
+		<Modal v-if="rmItem" header="Modal header" resolve="Ok" reject="Huita" @resolve="rm()" @reject="rmItem=null">
+			Вы действительно хотите удалить элемент {{rmItem.name}}
 		</Modal>
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector
@@ -11,6 +11,7 @@
 			:group="type"
 			@add="chIdent('new')"
 			@change="chIdent($event)"
+			@rm="rmModal($event)"
 		/>
 		<Editor v-else-if="type && ident" :typeprod="type" :identprod="ident"/>
 	</div>
@@ -38,6 +39,7 @@ export default {
 			type: null,
 			ident: null,
 			preferences: preferences,
+			rmItem: null,
 		}
 	},
 	methods: {
@@ -47,6 +49,16 @@ export default {
 		},
 		chIdent: function(ident) {
 			this.ident = ident;
+		},
+		rmModal: function(name, ident) {
+			this.rmItem = {
+				id: ident,
+				name: name
+			};
+		},
+		rm: function() {
+			console.log(this.rmItem.name+' removed')
+			this.rmItem = null;
 		}
 	}
 }

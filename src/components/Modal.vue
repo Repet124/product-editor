@@ -1,12 +1,12 @@
 <template>
-	<div class="modal_wrapper">
+	<div class="modal_wrapper" @click.self="$emit('reject')">
 		<div class="modal_container">
 			<h3 class="modal_header">{{ header }}</h3>
 			<p class="modal_message">
 				<slot></slot>
 			</p>
-			<button v-if="resolve" class="btn" @click="$emit('modal_resolve')">{{ resolve }}</button>
-			<button v-if="reject" class="btn" @click="$emit('modal_reject')">{{ reject }}</button>
+			<button v-if="reject" class="btn" @click="$emit('reject')">{{ reject }}</button>
+			<button v-if="resolve" class="btn" @click="$emit('resolve')">{{ resolve }}</button>
 		</div>
 	</div>
 </template>
