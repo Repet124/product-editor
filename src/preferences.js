@@ -1,58 +1,60 @@
 export default {
 	prod: {
-		name: {
-			component: 'Varchar',
-			label: 'Test label',
-			attrs: {
-				placeholderVal: "input yout text"
-			}
-		},
-		logo: {
-			component: 'ImageLoader',
-			label: 'Test label',
-			attrs: {
-				count: 1
-			}
-		},
-		screen: {
-			component: 'ImageLoader',
-			label: 'Test label',
-			opt: {
-				count: 3
-			}
-		},
-		radField: {
-			component: 'Radio',
-			label: 'Test label',
-			attrs: {
-				list: {
-					first: 'firstName',
-					second: 'secondName'
+		game: {
+			name: {
+				component: 'Varchar',
+				label: 'Test label',
+				attrs: {
+					placeholderVal: "input yout text"
 				}
-			}
-		},
-		checkField: {
-			component: 'Checkbox',
-			label: 'Test label',
-			attrs: {
-				list: [
-					{
-						name: 'firstName',
-						val: 'first'
-					},
-					{
-						name: 'secondName',
-						val: 'second'
+			},
+			logo: {
+				component: 'ImageLoader',
+				label: 'Test label',
+				attrs: {
+					count: 1
+				}
+			},
+			screen: {
+				component: 'ImageLoader',
+				label: 'Test label',
+				opt: {
+					count: 3
+				}
+			},
+			radField: {
+				component: 'Radio',
+				label: 'Test label',
+				attrs: {
+					list: {
+						first: 'firstName',
+						second: 'secondName'
 					}
-				]
-			}
-		},
-		list: {
-			component: 'List',
-			label: 'Test label',
-			attrs: {
-				phName:"input field name",
-				phVal: "input field val"
+				}
+			},
+			checkField: {
+				component: 'Checkbox',
+				label: 'Test label',
+				attrs: {
+					list: [
+						{
+							name: 'firstName',
+							val: 'first'
+						},
+						{
+							name: 'secondName',
+							val: 'second'
+						}
+					]
+				}
+			},
+			list: {
+				component: 'List',
+				label: 'Test label',
+				attrs: {
+					phName:"input field name",
+					phVal: "input field val"
+				}
 			}
 		}
 	},

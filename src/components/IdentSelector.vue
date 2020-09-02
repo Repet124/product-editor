@@ -1,5 +1,6 @@
 <template>
 	<div class="identSelector_container">
+		<button class="btn" @click="$emit('add')">New prod</button>
 		<strong v-if="!idents">Loading...</strong>
 		<ul v-else>
 			<li v-for="item in idents" :key="item.ident" @click="$emit('change', item.ident)">{{ item.name }}</li>

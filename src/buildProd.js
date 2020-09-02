@@ -2,10 +2,13 @@
 
 const methods = {
 
-	ImageLoader: value => value.map(item => ({
-		url: item,
-		file: false
-	}))
+	ImageLoader: value => {
+		if (value === '') return [];
+		return value.map(item => ({
+			url: item,
+			file: false
+		}))
+	}
 }
 
 export function handlerOfComponent(componentName, serverAnswer) {

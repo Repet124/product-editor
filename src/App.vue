@@ -3,8 +3,13 @@
 		{{type}}
 		{{ident}}
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
-		<IdentSelector v-if="type && !ident" :group="type" @change="chIdent($event)"></IdentSelector>
-		<Editor v-else-if="type && ident" :typeprod="type" :identprod="ident"></Editor>
+		<IdentSelector
+			v-if="type && !ident"
+			:group="type"
+			@add="chIdent('new')"
+			@change="chIdent($event)"
+		/>
+		<Editor v-else-if="type && ident" :typeprod="type" :identprod="ident"/>
 	</div>
 </template>
 

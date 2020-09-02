@@ -2,12 +2,12 @@
 	<div v-if="prod">
 		<component 
 			v-for="(val, name) in prod"
-			:is="preferences.prod[name].component"
+			:is="preferences.prod[typeprod][name].component"
 			:key="name"
 			v-model="prod[name]"
-			v-bind="preferences.prod[name].attrs"
+			v-bind="preferences.prod[typeprod][name].attrs"
 		>
-			{{preferences.prod[name].label}}
+			{{preferences.prod[typeprod][name].label}}
 		</component>
 		<button class="btn">Save</button>
 	</div>
@@ -46,11 +46,11 @@ export default {
 		}
 	},
 	methods: {
-		prodBuild: function(serverAnswer) {
+		prodBuild: function(prodData) {
 			let newProd = {};
 
-			for(let name in serverAnswer) {
-				newProd[name] = handlerOfComponent(this.preferences.prod[name].component, serverAnswer[name])
+			for(let name in prodData) {
+				newProd[name] = handlerOfComponent(this.preferences.prod[this.typeprod][name].component, prodData[name])
 			}
 
 			this.prod = newProd;
@@ -58,6 +58,16 @@ export default {
 	},
 	mounted: function() {
 		this.prod = null;
+
+		if (this.identprod === 'new') {
+			let emptyProd = {};
+			for(let name in preferences.prod[this.typeprod]) {
+				emptyProd[name] = '';
+			}
+			this.prodBuild(emptyProd);
+			return;
+		}
+
 		this.prodRequest.data = {};
 		this.prodRequest.send();
 	}
