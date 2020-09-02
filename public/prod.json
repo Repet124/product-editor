@@ -1,11 +1,12 @@
 {
+	"name": "some name testasdf asjflkasdjfasfsjaf",
 	"list":[
 		{
 			"name":"test name",
 			"val":"test val"
 		}
 	],
-	"radFiled":"second",
+	"radField":"second",
 	"checkField":[
 		"first",
 		"second"

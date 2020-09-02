@@ -1,23 +1,14 @@
 <template>
 	<div v-if="prod">
-		<Varchar name="test" placeholderVal="input yout text">
-			Test label:
-		</Varchar>
-		<List v-model="prod.list" phName="input field name" phVal="input field val">
-			Test label:
-		</List>
-		<Radio v-model="prod.selectItem" :list="preferences.radio">
-			Test label:
-		</Radio>
-		<Checkbox v-model="prod.arr" :list="preferences.checkbox">
-			Test label:
-		</Checkbox>
-		<ImageLoader v-model="prod.files" count="3">
-			Test label:
-		</ImageLoader>
-		<Arr v-model="prod.arr" placeholder="input">
-			Test label:
-		</Arr>
+		<component 
+			v-for="(val, name) in prod"
+			:is="preferences.prod[name].component"
+			:key="name"
+			v-model="prod[name]"
+			v-bind="preferences.prod[name].attrs"
+		>
+			{{preferences.prod[name].label}}
+		</component>
 		<button class="btn">Save</button>
 	</div>
 	<strong v-else>Loading...</strong>
@@ -34,7 +25,7 @@ import Arr from './inputs/arr.vue';
 
 import preferences from '../preferences.js';
 import Request from '../request.js';
-import { getHandlerOfCompnent } from '../buildProd.js';
+import { handlerOfComponent } from '../buildProd.js';
 
 export default {
 	name: 'Editor',
@@ -59,7 +50,7 @@ export default {
 			let newProd = {};
 
 			for(let name in serverAnswer) {
-				newProd[name] = getHandlerOfCompnent(preferences.prod[name].component)(serverAnswer[name])
+				newProd[name] = handlerOfComponent(this.preferences.prod[name].component, serverAnswer[name])
 			}
 
 			this.prod = newProd;

@@ -1,24 +1,31 @@
 export default {
 	prod: {
 		name: {
-			component: 'Varchar'
+			component: 'Varchar',
+			label: 'Test label',
+			attrs: {
+				placeholderVal: "input yout text"
+			}
 		},
 		logo: {
 			component: 'ImageLoader',
-			opt: {
+			label: 'Test label',
+			attrs: {
 				count: 1
 			}
 		},
 		screen: {
 			component: 'ImageLoader',
+			label: 'Test label',
 			opt: {
 				count: 3
 			}
-		}
+		},
 		radField: {
 			component: 'Radio',
-			opt: {
-				fields: {
+			label: 'Test label',
+			attrs: {
+				list: {
 					first: 'firstName',
 					second: 'secondName'
 				}
@@ -26,8 +33,9 @@ export default {
 		},
 		checkField: {
 			component: 'Checkbox',
-			opt: {
-				fields: [
+			label: 'Test label',
+			attrs: {
+				list: [
 					{
 						name: 'firstName',
 						val: 'first'
@@ -41,6 +49,11 @@ export default {
 		},
 		list: {
 			component: 'List',
+			label: 'Test label',
+			attrs: {
+				phName:"input field name",
+				phVal: "input field val"
+			}
 		}
 	},
 	types: {

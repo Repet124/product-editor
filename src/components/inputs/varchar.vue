@@ -4,7 +4,7 @@
 			<slot></slot>
 		</label>
 		<div class="input_wrapper">
-			<input class="input_text" :id="ident" type="text" :name="name" v-model="txt" :placeholder="placeholder">
+			<input class="input_text" :id="ident" type="text" :name="name" :value="value" @input="$emit('change', $event.value)" :placeholder="placeholder">
 		</div>
 	</div>
 </template>
@@ -13,11 +13,14 @@
 
 export default {
 	name: 'Varchar',
-	props: ['name', 'defaultValue', 'placeholderVal'],
+	model: {
+		prop: 'value',
+		event: 'change'
+	},
+	props: ['name', 'value', 'placeholderVal'],
 	data: function() {
 		return {
 			ident: 'ident'+this.name,
-			txt: this.defaultValue,
 			placeholder: this.placeholderVal
 		}
 	}
