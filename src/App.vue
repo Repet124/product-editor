@@ -2,6 +2,9 @@
 	<div id="app">
 		{{type}}
 		{{ident}}
+		<Modal header="Modal header" resolve="Ok" reject="Huita">
+			Вы действительно хотите удалить элемент
+		</Modal>
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector
 			v-if="type && !ident"
@@ -18,6 +21,7 @@
 import TypeSelector from './components/TypeSelector.vue';
 import IdentSelector from './components/IdentSelector.vue';
 import Editor from './components/Editor.vue';
+import Modal from './components/Modal.vue';
 
 import preferences from './preferences.js';
 
@@ -26,7 +30,8 @@ export default {
 	components: {
 		TypeSelector,
 		IdentSelector,
-		Editor
+		Editor,
+		Modal
 	},
 	data: function() {
 		return {
