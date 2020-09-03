@@ -8,6 +8,7 @@
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector
 			v-if="type && !ident"
+			ref="identSelector"
 			:group="type"
 			@add="chIdent('new')"
 			@change="chIdent($event)"
@@ -70,7 +71,10 @@ export default {
 			let rmRequest = new Request('rm', () => {
 				this.rmItem = null;
 				this.modal = {...modalSuccess.rm};
-				this.modal.rejectHandler = this.modal.resolveHandler = () => {this.modal = null;}
+				this.modal.rejectHandler = this.modal.resolveHandler = () => {
+					this.modal = null;
+					this.$refs.identSelector.getIdents();
+				}
 			})
 			rmRequest.data = {};
 			rmRequest.send();
