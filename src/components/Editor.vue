@@ -26,7 +26,7 @@ import Arr from './inputs/arr.vue';
 import preferences from '../preferences.js';
 import Request from '../request.js';
 import {success as modal} from '../modal.js';
-import { handlerOfComponent } from '../buildProd.js';
+import { prepare, parse } from '../handlerProd.js';
 
 const modals = {
 	success: {
@@ -56,28 +56,15 @@ export default {
 			preferences: preferences,
 			prod: null,
 			modal: false,
-			prodRequest: new Request('prod', this.prodBuild),
-			addRequest: new Request('add', ()=>{this.modal = modal.add})
+			prodRequest: new Request('prod', this.build),
 		}
 	},
 	methods: {
-		prodBuild: function(prodData) {
-			let newProd = {};
-
-			for(let name in prodData) {
-				newProd[name] = handlerOfComponent(this.preferences.prod[this.typeprod][name].component, prodData[name])
-			}
-
-			this.prod = newProd;
+		build: function(prodData) {
+			this.prod = prepare, parse(prodData);
 		},
-		prepareProd: function() {
-			let response = {};
-			for(let name in this.prod) {
-				
-			}
-		},
-		prodSend: function() {
-			
+		send: function() {
+			let edit = new Request('add', ()=>{this.modal = modal.add})
 		}
 	},
 	mounted: function() {
@@ -88,7 +75,7 @@ export default {
 			for(let name in preferences.prod[this.typeprod]) {
 				emptyProd[name] = '';
 			}
-			this.prodBuild(emptyProd);
+			this.build(emptyProd);
 			return;
 		}
 
