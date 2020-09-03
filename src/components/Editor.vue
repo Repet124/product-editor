@@ -1,5 +1,11 @@
 <template>
 	<div v-if="prod">
+		<Modal
+			v-if="modal"
+			@resolve="modal = null"
+		>
+			{{ modal.message }}
+		</Modal>
 		<component 
 			v-for="(val, name) in prod"
 			:is="preferences.prod[typeprod][name].component"
@@ -9,7 +15,7 @@
 		>
 			{{preferences.prod[typeprod][name].label}}
 		</component>
-		<button class="btn">Save</button>
+		<button @click="send(identprod === 'new' ? 'add' : 'ch')" class="btn">Save</button>
 	</div>
 	<strong v-else>Loading...</strong>
 </template>
@@ -27,18 +33,6 @@ import preferences from '../preferences.js';
 import Request from '../request.js';
 import {success as modal} from '../modal.js';
 import { prepare, parse } from '../handlerProd.js';
-
-const modals = {
-	success: {
-		add: {
-			message: 'Товар успешно добавлен',
-			resolve: 'Ok'
-		},
-		ch: {
-			message: 'Товар успешно изменён'
-		}
-	}
-}
 
 export default {
 	name: 'Editor',
@@ -61,10 +55,12 @@ export default {
 	},
 	methods: {
 		build: function(prodData) {
-			this.prod = prepare, parse(prodData);
+			this.prod = parse(prodData);
 		},
-		send: function() {
-			let edit = new Request('add', ()=>{this.modal = modal.add})
+		send: function(action) {
+			let edit = new Request(action, ()=>{this.modal = modal.add});
+			edit.data = prepare(this.prod);
+			edit.send();
 		}
 	},
 	mounted: function() {

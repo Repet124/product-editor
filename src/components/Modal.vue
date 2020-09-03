@@ -15,7 +15,7 @@
 
 export default {
 	name: 'Modal',
-	props: ['header', 'message', 'resolve', 'reject', 'timeout'],
+	props: ['header', 'resolve', 'reject', 'timeout'],
 	data: function() {
 		return {
 		}
