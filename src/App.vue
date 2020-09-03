@@ -2,8 +2,8 @@
 	<div id="app">
 		{{type}}
 		{{ident}}
-		<Modal v-if="rmItem" :header="modal.header" :reject="modal.reject" @resolve="rm()" @reject="rmItem=null">
-			{{modal.message}} {{rmItem.name}} ?
+		<Modal v-if="modal" :header="modal.header" :resolve="modal.resolve" :reject="modal.reject" @resolve="modal.resolveHandler" @reject="modal.rejectHandler">
+			{{modal.message}}
 		</Modal>
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector
@@ -23,8 +23,9 @@ import TypeSelector from './components/TypeSelector.vue';
 import IdentSelector from './components/IdentSelector.vue';
 import Editor from './components/Editor.vue';
 import Modal from './components/Modal.vue';
-import {info as modals} from './modal.js';
 
+import Request from './request.js';
+import {info as modalInfo, success as modalSuccess} from './modal.js';
 import preferences from './preferences.js';
 
 export default {
@@ -41,7 +42,7 @@ export default {
 			ident: null,
 			preferences: preferences,
 			rmItem: null,
-			modal: modals.rm
+			modal: null
 		}
 	},
 	methods: {
@@ -57,10 +58,22 @@ export default {
 				id: ident,
 				name: name
 			};
+			this.modal = {...modalInfo.rm};
+			this.modal.message += ' ' + name + '?';
+			this.modal.resolve = 'Да';
+			this.modal.reject = 'Нет';
+			this.modal.resolveHandler = this.rm;
+			this.modal.rejectHandler = () => {this.modal=null;this.rmItem=null}
 		},
 		rm: function() {
-			console.log(this.rmItem.name+' removed')
-			this.rmItem = null;
+			this.modal = null;
+			let rmRequest = new Request('rm', () => {
+				this.rmItem = null;
+				this.modal = {...modalSuccess.rm};
+				this.modal.rejectHandler = this.modal.resolveHandler = () => {this.modal = null;}
+			})
+			rmRequest.data = {};
+			rmRequest.send();
 		}
 	}
 }

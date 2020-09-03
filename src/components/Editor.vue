@@ -22,6 +22,8 @@
 
 <script>
 
+import Modal from './Modal.vue';
+
 import Varchar from './inputs/varchar.vue';
 import List from './inputs/list.vue';
 import Radio from  './inputs/radio.vue';
@@ -42,7 +44,8 @@ export default {
 		List,
 		Radio,
 		Checkbox,
-		ImageLoader
+		ImageLoader,
+		Modal
 	},
 	props: ['typeprod', 'identprod'],
 	data: function() {
@@ -55,11 +58,11 @@ export default {
 	},
 	methods: {
 		build: function(prodData) {
-			this.prod = parse(prodData);
+			this.prod = parse(this.typeprod, prodData);
 		},
 		send: function(action) {
-			let edit = new Request(action, ()=>{this.modal = modal[identprod === 'new' ? 'add' : 'ch']});
-			edit.data = prepare(this.prod);
+			let edit = new Request(action, ()=>{this.modal = modal[this.identprod === 'new' ? 'add' : 'ch']});
+			edit.data = prepare(this.typeprod, this.prod);
 			edit.send();
 		}
 	},

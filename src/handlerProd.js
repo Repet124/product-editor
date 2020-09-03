@@ -1,33 +1,34 @@
 import preferences from './preferences.js';
 
-function parseImageLoader(value) {
-	if (value === '') return [];
-	return value.map(item => ({
-		url: item,
-		file: false
-	}))
-}
+const methods = {
+	parseImageLoader: (value) => {
+		if (value === '') return [];
+		return value.map(item => ({
+			url: item,
+			file: false
+		}))
+	},
 
-
-function prepareImageLoader(field, value) {
-	let data = [], files = [], result = {};
-	value.forEach(item => {
-		if (item.file) {
+	prepareImageLoader: (field, value) => {
+		let data = [], files = [], result = {};
+		value.forEach(item => {
+			if (item.file) {
+				data.push({
+					url: item.url,
+					file: item.file.name
+				});
+				files.push(item.file);
+				return;
+			}
 			data.push({
-				url: item.url,
-				file: file.name
+				url: item.url
 			});
-			files.push(item.file);
-			return;
-		}
-		data.push({
-			url: item.url
-		});
-	})
-	result[field] = data;
-	result[field+'-files'] = files;
+		})
+		result[field] = data;
+		result[field+'-files'] = files;
 
-	return result;
+		return result;
+	}
 }
 
 function handlerProdOfAction(action, type, prodData) {
@@ -35,15 +36,15 @@ function handlerProdOfAction(action, type, prodData) {
 
 	for(let name in prodData) {
 
-		handler = window[action+preferences.prod[type][name].component];
+		handler = methods[action+preferences.prod[type][name].component];
 
 		if (handler) {
 			switch(action) {
 				case 'parse':
-					prod[name] = handler(prodData);
+					prod[name] = handler(prodData[name]);
 					break;
 				case 'prepare':
-					prod = {...prod, ...handler(name, prodData)};
+					prod = {...prod, ...handler(name, prodData[name])};
 			}
 			continue;
 		}

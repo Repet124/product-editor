@@ -1,4 +1,4 @@
-export success: {
+export const success = {
 	add: {
 		message: 'Товар успешно добавлен!'
 	},
@@ -10,7 +10,7 @@ export success: {
 	}
 }
 
-export info: {
+export const info = {
 	rm: {
 		header: 'Удалить?',
 		message: 'Вы действительно хотите удалить',

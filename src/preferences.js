@@ -56,6 +56,64 @@ export default {
 					phVal: "input field val"
 				}
 			}
+		},
+		pack: {
+			name: {
+				component: 'Varchar',
+				label: 'Name prod',
+				attrs: {
+					placeholderVal: "Pack name..."
+				}
+			},
+			logo: {
+				component: 'ImageLoader',
+				label: 'Logo',
+				attrs: {
+					count: 1
+				}
+			},
+			screen: {
+				component: 'ImageLoader',
+				label: 'Sreenshots',
+				opt: {
+					count: 3
+				}
+			},
+			catig: {
+				component: 'Radio',
+				label: 'Catigory',
+				attrs: {
+					list: {
+						new: 'New!',
+						pop: 'Popular',
+						discount: 'Discount!'
+					}
+				}
+			},
+			tags: {
+				component: 'Checkbox',
+				label: 'Tags',
+				attrs: {
+					list: [
+						{
+							name: 'tag 1',
+							val: '123'
+						},
+						{
+							name: 'tag 2',
+							val: '312'
+						}
+					]
+				}
+			},
+			list: {
+				component: 'List',
+				label: 'Fields',
+				attrs: {
+					phName:"input field name",
+					phVal: "input field val"
+				}
+			}
 		}
 	},
 	types: {
@@ -78,20 +136,20 @@ export default {
 		},
 		add: {
 			type: 'FormData',
-			method: 'post',
-			url: '/func.js',
+			method: 'get',
+			url: '/func.json',
 			marker: {}
 		},
 		ch: {
 			type: 'FormData',
-			method: 'post',
-			url: '/func.js',
+			method: 'get',
+			url: '/func.json',
 			marker: {}
 		},
 		rm: {
 			type: 'json',
 			method: 'get',
-			url: '/func.js',
+			url: '/func.json',
 			marker: {}
 		}
 	}

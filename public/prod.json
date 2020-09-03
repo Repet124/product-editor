@@ -1,15 +1,14 @@
 {
-	"name": "some name testasdf asjflkasdjfasfsjaf",
+	"name": "Super duper pack",
 	"list":[
 		{
 			"name":"test name",
 			"val":"test val"
 		}
 	],
-	"radField":"second",
-	"checkField":[
-		"first",
-		"second"
+	"catig":"new",
+	"tags":[
+		"123"
 	],
 	"screen":[
 		"https://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg",
