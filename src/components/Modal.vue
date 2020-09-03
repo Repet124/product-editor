@@ -5,8 +5,8 @@
 			<p class="modal_message">
 				<slot></slot>
 			</p>
+			<button class="btn" @click="$emit('resolve')">{{ resolve ? resolve : 'Ok' }}</button>
 			<button v-if="reject" class="btn" @click="$emit('reject')">{{ reject }}</button>
-			<button v-if="resolve" class="btn" @click="$emit('resolve')">{{ resolve }}</button>
 		</div>
 	</div>
 </template>

@@ -58,7 +58,7 @@ export default {
 			this.prod = parse(prodData);
 		},
 		send: function(action) {
-			let edit = new Request(action, ()=>{this.modal = modal.add});
+			let edit = new Request(action, ()=>{this.modal = modal[identprod === 'new' ? 'add' : 'ch']});
 			edit.data = prepare(this.prod);
 			edit.send();
 		}
