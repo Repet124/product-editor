@@ -25,7 +25,20 @@ import Arr from './inputs/arr.vue';
 
 import preferences from '../preferences.js';
 import Request from '../request.js';
+import {success as modal} from '../modal.js';
 import { handlerOfComponent } from '../buildProd.js';
+
+const modals = {
+	success: {
+		add: {
+			message: 'Товар успешно добавлен',
+			resolve: 'Ok'
+		},
+		ch: {
+			message: 'Товар успешно изменён'
+		}
+	}
+}
 
 export default {
 	name: 'Editor',
@@ -42,7 +55,9 @@ export default {
 		return {
 			preferences: preferences,
 			prod: null,
-			prodRequest: new Request('prod', this.prodBuild)
+			modal: false,
+			prodRequest: new Request('prod', this.prodBuild),
+			addRequest: new Request('add', ()=>{this.modal = modal.add})
 		}
 	},
 	methods: {
@@ -54,6 +69,15 @@ export default {
 			}
 
 			this.prod = newProd;
+		},
+		prepareProd: function() {
+			let response = {};
+			for(let name in this.prod) {
+				
+			}
+		},
+		prodSend: function() {
+			
 		}
 	},
 	mounted: function() {

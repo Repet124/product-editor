@@ -2,8 +2,8 @@
 	<div id="app">
 		{{type}}
 		{{ident}}
-		<Modal v-if="rmItem" header="Modal header" resolve="Ok" reject="Huita" @resolve="rm()" @reject="rmItem=null">
-			Вы действительно хотите удалить элемент {{rmItem.name}}
+		<Modal v-if="rmItem" :header="modal.header" :reject="modal.reject" @resolve="rm()" @reject="rmItem=null">
+			{{modal.message}} {{rmItem.name}} ?
 		</Modal>
 		<TypeSelector :list="preferences.types" @change="chType($event)">Выбор типа:</TypeSelector>
 		<IdentSelector
@@ -23,6 +23,7 @@ import TypeSelector from './components/TypeSelector.vue';
 import IdentSelector from './components/IdentSelector.vue';
 import Editor from './components/Editor.vue';
 import Modal from './components/Modal.vue';
+import {info as modals} from './modal.js';
 
 import preferences from './preferences.js';
 
@@ -40,6 +41,7 @@ export default {
 			ident: null,
 			preferences: preferences,
 			rmItem: null,
+			modal: modals.rm
 		}
 	},
 	methods: {
