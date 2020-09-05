@@ -1,13 +1,12 @@
-import preferences from './preferences.js';
 import {Ajax} from './ajax.js';
 
 export default class Request {
-	constructor(type, callback=()=>{console.log('Sended')}) {
-		this._url = preferences.request[type].url;
+	constructor(preferences, callback=()=>{console.log('Sended')}) {
+		this._url = preferences.url;
 		this._data = {};
 		this._callback = callback;
-		this._method = preferences.request[type].method;
-		this._marker = preferences.request[type].marker;
+		this._method = preferences.method;
+		this._marker = preferences.marker;
 	}
 
 	set data(d) {

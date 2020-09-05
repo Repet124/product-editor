@@ -27,7 +27,6 @@ import Modal from './components/Modal.vue';
 
 import Request from './request.js';
 import {info as modalInfo, success as modalSuccess} from './modal.js';
-import preferences from './preferences.js';
 
 export default {
 	name: 'App',
@@ -37,11 +36,16 @@ export default {
 		Editor,
 		Modal
 	},
+	props: ['preferences'],
+	provide: function() {
+		return {
+			preferences: this.preferences
+		}
+	},
 	data: function() {
 		return {
 			type: null,
 			ident: null,
-			preferences: preferences,
 			rmItem: null,
 			modal: null
 		}
@@ -68,7 +72,7 @@ export default {
 		},
 		rm: function() {
 			this.modal = null;
-			let rmRequest = new Request('rm', () => {
+			let rmRequest = new Request(this.preferences.request.rm, () => {
 				this.rmItem = null;
 				this.modal = {...modalSuccess.rm};
 				this.modal.rejectHandler = this.modal.resolveHandler = () => {

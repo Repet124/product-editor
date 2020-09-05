@@ -18,10 +18,11 @@ import Request from '../request.js';
 export default {
 	name: 'IdentSelector',
 	props: ['group'],
+	inject: ['preferences'],
 	data: function() {
 		return {
 			idents: null,
-			listRequest: new Request('list', answer => {this.idents = answer[this.group]})
+			listRequest: new Request(this.preferences.request.list, answer => {this.idents = answer[this.group]})
 		}
 	},
 	methods: {

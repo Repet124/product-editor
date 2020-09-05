@@ -1,5 +1,3 @@
-import preferences from './preferences.js';
-
 const methods = {
 	parseImageLoader: (value) => {
 		if (value === '') return [];
@@ -31,12 +29,12 @@ const methods = {
 	}
 }
 
-function handlerProdOfAction(action, type, prodData) {
+function handlerProdOfAction(action, prodPreferences, prodData) {
 	let prod = {}, handler;
 
 	for(let name in prodData) {
 
-		handler = methods[action+preferences.prod[type][name].component];
+		handler = methods[action+prodPreferences[name].component];
 
 		if (handler) {
 			switch(action) {

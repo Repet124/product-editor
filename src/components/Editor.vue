@@ -31,7 +31,6 @@ import Checkbox from './inputs/checkbox.vue';
 import ImageLoader from './inputs/imageLoader.vue';
 import Arr from './inputs/arr.vue';
 
-import preferences from '../preferences.js';
 import Request from '../request.js';
 import {success as modal} from '../modal.js';
 import { prepare, parse } from '../handlerProd.js';
@@ -47,22 +46,22 @@ export default {
 		ImageLoader,
 		Modal
 	},
+	inject: ['preferences'],
 	props: ['typeprod', 'identprod'],
 	data: function() {
 		return {
-			preferences: preferences,
 			prod: null,
 			modal: false,
-			prodRequest: new Request('prod', this.build),
+			prodRequest: new Request(this.preferences.request.prod, this.build),
 		}
 	},
 	methods: {
 		build: function(prodData) {
-			this.prod = parse(this.typeprod, prodData);
+			this.prod = parse(this.preferences.prod[this.typeprod], prodData);
 		},
 		send: function(action) {
-			let edit = new Request(action, ()=>{this.modal = modal[this.identprod === 'new' ? 'add' : 'ch']});
-			edit.data = prepare(this.typeprod, this.prod);
+			let edit = new Request(this.preferences.request[action], ()=>{this.modal = modal[this.identprod === 'new' ? 'add' : 'ch']});
+			edit.data = prepare(this.preferences.prod[this.typeprod], this.prod);
 			edit.send();
 		}
 	},
@@ -71,7 +70,7 @@ export default {
 
 		if (this.identprod === 'new') {
 			let emptyProd = {};
-			for(let name in preferences.prod[this.typeprod]) {
+			for(let name in this.preferences.prod[this.typeprod]) {
 				emptyProd[name] = '';
 			}
 			this.build(emptyProd);
